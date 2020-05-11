@@ -1,0 +1,57 @@
+﻿@model DisplayPostViewModel
+
+<div class="container">
+    <div class="row">
+        <!-- Blog Post Content Column -->
+        <div class="col-lg-8">
+            <h1>@Model.BlogPost.Title</h1>
+
+            <p class="lead">
+                by @Model.BlogPost.BlogAuthor
+            </p>
+            <hr>
+            <p><span class="fa fa-clock-o"></span> Posted on @Model.BlogPost.BlogDate.ToLongDateString() at @Model.BlogPost.BlogDate.ToShortTimeString()</p>
+            <hr>
+            <p class="lead">@Model.BlogPost.BlogText</p>
+            <hr>
+
+            <!-- Comments Form -->
+            <div class="well">
+                <h4>Leave a Comment:</h4>
+                <form role="form" method="post" action="/home/addcomment">
+                    <input type="hidden" name="blogId" value="@Model.BlogPost.Id" />
+                    <div>
+                        <input id="comment-author" type="text" class="form-control" name="commentAuthor" placeholder="Enter your name" value="@(Model.CommenterName == null ? "" : $"{Model.CommenterName}")"/>
+                       
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" name="commentText" id="comment-text"></textarea>
+                    </div>
+                    <button id="submit-comment" disabled type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <hr>
+
+            <!-- Posted Comments -->
+            @foreach (Comment c in Model.BlogPost.Comments)
+            {
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            @c.CommentAuthor
+                            <small>@c.CommentDate.ToLongDateString() at @c.CommentDate.ToShortTimeString()</small>
+                        </h4>
+                        @c.CommentText
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{ 
+    <script src="~/js/DisplayPost.js"></script>
+}
