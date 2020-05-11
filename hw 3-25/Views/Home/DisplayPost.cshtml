@@ -21,7 +21,7 @@
                 <form role="form" method="post" action="/home/addcomment">
                     <input type="hidden" name="blogId" value="@Model.BlogPost.Id" />
                     <div>
-                        <input id="comment-author" type="text" class="form-control" name="commentAuthor" placeholder="Enter your name" value="@(Model.CommenterName == null ? "" : $"{Model.CommenterName}")"/>
+                        <input id="comment-author" type="text" class="form-control" name="commentAuthor" placeholder="Enter your name please" value="@(Model.CommenterName == null ? "" : $"{Model.CommenterName}")"/>
                        
                     </div>
                     <br />
